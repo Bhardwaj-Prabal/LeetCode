@@ -1,3 +1,4 @@
+#pragma optimize GCC("O3")
 class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
