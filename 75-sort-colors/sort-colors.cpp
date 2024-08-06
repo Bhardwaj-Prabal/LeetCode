@@ -1,17 +1,33 @@
 class Solution {
 public:
-    void sortColors(vector<int>& nums) {
-        vector<int> freq(3, 0);
-        int n = nums.size();
+    void swap(int &num1, int &num2) {
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+    }
 
-        for (int num : nums) {
-            freq[num]++;
+    void sortColors(vector<int>& nums) {
+        int n = nums.size();
+        int j = n - 1;
+
+        // First pass: Move all 2s to the end
+        for (int i = 0; i <= j; ) {
+            if (nums[i] == 2) {
+                swap(nums[i], nums[j]);
+                j--;
+            } else {
+                i++;
+            }
         }
-    
-        int index = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < freq[i]; j++) {
-                nums[index++] = i;
+
+        // Second pass: Move all 1s to their correct place
+        int k = 0;
+        while (k <= j) {
+            if (nums[k] == 1) {
+                swap(nums[k], nums[j]);
+                j--;
+            } else {
+                k++;
             }
         }
     }
