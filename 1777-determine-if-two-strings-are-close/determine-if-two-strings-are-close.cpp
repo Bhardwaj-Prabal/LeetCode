@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        int n = word1.size();
+        int m = word2.size();
+
+        if (n != m) return false;
+
+        vector<int> mp1(26, 0);
+        vector<int> mp2(26, 0);
+        for (auto &c : word1) {
+            mp1[c - 'a']++;
+        }
+
+        for (auto &c : word2) {
+            mp2[c - 'a']++;
+        }
+        for (int i = 0; i < 26; i++) {
+            if ((mp1[i] && !mp2[i]) || (!mp1[i] && mp2[i])) return false;
+        }
+
+
+        sort(mp1.begin(), mp1.end());
+        sort(mp2.begin(), mp2.end());
+
+
+        return mp1 == mp2;
+    }
+};
